@@ -2,7 +2,7 @@
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
-    <title>基于vue-router的案例</title>
+    <title>编程式导航</title>
     <style type="text/css">
       html,
       body,
@@ -130,7 +130,13 @@
             <h2>user组件 用户id为 {{$route.params.uid}}</h2>
             <h2>user组件 用户id为 {{$route.params}}</h2>
             <h2>props参数为 {{uid}}  --- 姓名：{{uname}} -- 年龄：{{age}}</h2>  
-        </div>`
+            <button @click='goRegister'>跳转到注册页面</button>
+        </div>`,
+        methods: {
+            goRegister(){
+                this.$router.push('/register')
+            }
+        },
       }
       
       var Register = {
@@ -143,8 +149,14 @@
           <router-link to="/register/tab2">tab2</router-link>
           <!-- 子路由占位符 -->
           <router-view></router-view>
+          <button @click='cancelFoo'>返回</button>
         </div>
-        `
+        `,
+        methods: {
+            cancelFoo(){
+                this.$router.go(-1)
+            }
+        },
       } 
       const Help = {
         props: ['canshu'],

@@ -155,10 +155,7 @@ var myRouter = new VueRouter({
     routes: [
         //通过/:参数名  的形式传递参数 
         { path: "/user/:id", component: User },
-        
-
     ]
-
 })
 
 补充：
