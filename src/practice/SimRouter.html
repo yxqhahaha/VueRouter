@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <!-- 引入vue -->
+    <script src="../../res/vue_2.5.22.js"></script>
+</head>
+<body>
+    <div id="app">
+        <a href="#/phone">手机</a>
+        <a href="#/computer">电脑</a>
+        <a href="#/earphone">耳机</a>
+        <a href="#/watch">手表</a>
+
+        <!-- 根据 :is 属性指定组件的名称，把对应的组件渲染到component标签所在位置 -->
+        <!-- 可以吧component标签当做是 组件的占位符 -->
+        <component :is="comName"></component>
+    </div>
+
+    <script>
+        //创建组件
+        const phone = {
+            template: `<h1>手机</h1>`
+        }
+        const computer = {
+            template: `<h1>电脑</h1>`
+        }
+        const earphone = {
+            template: `<h1>耳机</h1>`
+        }
+        const watch = {
+            template: `<h1>手表</h1>`
+        }
+        // 新建一个Vue实例
+        var vm = new Vue({
+            el: '#app',
+            data: {
+                comName: 'phone'
+            },
+            // 注册私有组件
+            components: {
+                phone,
+                computer,
+                earphone,
+                watch
+            }
+        })
+
+         // 监听 window 的 onhashchange 事件，根据获取到的最新的 hash 值，切换要显示的组件的名称
+         window.onhashchange = function(){
+             // 通过location.hash 获取最新的hash值
+             console.log(location.hash);
+             switch(location.hash.slice(1)){
+                case '/phone':
+                    vm.comName = 'phone'
+                    console.log('phone');
+                    
+                    break; 
+                case '/computer':
+                    vm.comName = 'computer'
+                    break; 
+                case '/earphone':
+                    vm.comName = 'earphone'
+                    console.log('earphone');
+                    break; 
+                case '/watch':
+                    vm.comName = 'watch'
+                    break;
+                default:
+                    break;
+             }
+         }
+    </script>
+</body>
+</html>
